@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Proximity Bot</title>
+
+{% load staticfiles %}
+
+<script src={% static "js/libs/require.js"%} data-main={% static "js/rmx" %} tpye="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href={% static "css/main.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "css/textnode.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "css/logo.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "css/footer.css" %}>
+
+<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic'
+      rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,600,300,700'
+      rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+
+{% include "sub/logo.html" %}
+
+
+<div class="query-box">
+
+  <h2>Project description</h2>
+  
+  {% include "data/about.html" %}
+  <br>
+  <h2><a href="/corpus">Browse existing corpora</a> or <a href="/corpus/new/">create a corpus</a></h2>
+  <h2><a href="/docs/how-to">See how it works</a></h2>
+</div>
+
+{% include "sub/footernew.html" %}
+</body>
+</html>

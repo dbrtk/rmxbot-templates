@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    
+    <title>Proximity Bot</title>
+
+    {% load staticfiles %}
+    <script src={% static "js/libs/jquery.js"%} type="text/javascript"></script>
+    
+    <link rel="stylesheet" type="text/css" href={% static "css/main.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "css/data.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "css/logo.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "css/footer.css" %}>
+
+
+    <script type="text/javascript">
+    $(function() {
+        $("img.gif").hover(
+            function() {
+                var source = $(this).attr('src');
+                source = source.replace(/\.[^/.]+$/, ".gif");
+                $(this).attr("src", source);
+            },
+            function() {
+                var source = $(this).attr('src');
+                source = source.replace(/\.[^/.]+$/, ".png");
+                $(this).attr("src", source);
+            }                         
+        );                  
+    });
+    
+    </script>
+    
+  </head>
+  
+  <body>
+    {% include "sub/logo.html" %}
+
+
+    
+    <div class="rmx-recent-data">
+
+      <h1>How to use ProximityBot in a few gifs.</h1>
+
+      <h1><font color="red">Coming soon...</font></h1>
+      
+    </div>
+    
+    {% include "sub/footernew.html" %}
+  </body>
+</html>

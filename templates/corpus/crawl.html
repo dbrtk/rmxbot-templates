@@ -1,0 +1,16 @@
+
+<div class="rmx-recent-data">
+
+  <h1>{{ corpus_name }}</h1>
+  
+  <h2><a target="_blank" href="/corpus/{{ docid }}/urls/">Urls</a> attached to this corpus.</h2>
+  {% for item in urls %}
+  <div class="url-box">
+    <a href="{{ item }}">{{ item }}</a>
+  </div>
+  {% endfor %}
+  <p>{{ urls_length }} url(s) attached to this corpus.
+    <a target="_blank" href="/corpus/{{ docid }}/urls/">View and edit.</a>
+  </p>
+</div>
+
