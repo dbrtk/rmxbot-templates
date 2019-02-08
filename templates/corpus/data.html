@@ -37,17 +37,23 @@
 
 {% include "sub/simple-error.html" %}
 
-
-
-
-{% if datatype == 'crawl' %}
-  {% include "corpus/crawl.html"%}
-{% elif datatype == 'screenplay' %}
-  {% include "corpus/screenplay.html"%}
-{% else %}
-  {% include "corpus/crawl.html"%}
-{% endif %}
-
+<div class="rmx-recent-data">
+    <h1>{{ corpus_name }}</h1>
+    <h2><a href="/corpus/{{ corpusid }}/urls/">Texts</a> attached to this corpus.</h2>
+    {% for item in texts %}
+        <div class="url-box">
+            {% if item.url %}
+                <a href="{{ item.url }}">{{ item.url }}</a>
+            {% else %}
+                <a href="/corpus/{% firstof corpusid item.corpusid %}/file/{{item.data_id}}/"
+                   target="_blank">{% firstof item.title item.file_name %}</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <p>{{ urls_length }} texts attached to this corpus.
+        <a href="/corpus/{{ corpusid }}/urls/">View and edit.</a>
+    </p>
+</div>
 
 {% include "corpus/clustering.html" %}
 
@@ -55,6 +61,3 @@
 
 </body>
 </html>
-
-
-

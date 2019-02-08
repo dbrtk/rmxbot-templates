@@ -34,47 +34,27 @@
 <div class="rmx-recent-data">
     <h2>List of existing corpora</h2>
     {% for item in data %}
-
-    {% if item.screenplay %}
-
-    <div class="url-box">
-
-        <h2><a href="/corpus/{{ item.id }}/">
-            {% firstof item.name %}
-        </a></h2>
-        <p>{{ item.description }}</p>
-        <ul>
-            {% for obj in item.data %}
-
-            <li>
-                <span>"{{ obj.title }}";
-                    {% if obj.director %}director: {{obj.director}}; {% endif %}
-                    {% if obj.author %}author: {{obj.author}}.{% endif %}
-                </span>
-            </li>
+        <div class="url-box">
+            <h2><a href="/corpus/{{ item.corpusid }}/">{% firstof item.name %}</a></h2>
+            {% if item.description %}
+                <p>{{ item.description }}</p>
+            {% endif %}
+            <ul>
+            {% for obj in item.urls %}
+                <div class="url-box">
+                        {% if obj.url %}
+                            <li><a href="{{ obj.url }}">{{ obj.url }}</a></li>
+                        {% else %}
+                            <li><a href="/corpus/{{ item.corpusid }}/file/{{obj.data_id}}/"
+                                   target="_blank">{% firstof obj.title obj.file_name %}</a></li>
+                        {% endif %}
+                </div>
             {% endfor %}
-        </ul> <br />
-
-    </div>
-    {% else %}
-
-    <div class="url-box">
-
-      <h2><a href="/corpus/{{ item.id }}/">
-          {% firstof item.name item.description%}
-      </a></h2>
-      <p>{{ item.description }}</p>      
-      <ul> 
-        {% for obj in item.urls %} 
-        <li><a href="{{ obj.url }}" target="_blank">{{ obj.url }}</a></li> 
-        {% endfor %} 
-      </ul> <br />
-      Created: {{ item.created }}
-    </div>
-    {% endif %}
+            </ul>
+            <span>Created: {{ item.created }}</span>
+        </div>
     {% endfor %}
 </div>
-
 
 {% include "sub/footernew.html" %}
 </body>

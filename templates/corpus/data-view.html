@@ -24,8 +24,6 @@
 
 {% include "sub/logo.html" %}
 
-
-
 {% include "sub/simple-error.html" %}
 
 <div class="add-page-form">  
@@ -33,52 +31,40 @@
     <h1>List of urls scrapped for corpus: "{{name}}"</h1>
   {% elif datatype == 'screenplay' %}
     <h1>Text files that make the corpus: "{{name}}" <a href="/corpus/{{corpusid}}/data/edit/">[edit]</a> (<a href="/corpus/{{corpusid}}/">go back to corpus</a>)</h1>
-  {% endif %}  
+  {% endif %}
+
+    <h2>Add files to corpus</h2>
+    <form class="new-corpus-form" action="{{files_upload_endpoint}}/" method="post" enctype="multipart/form-data" >
+        <label for="files">Files upload:</label>
+        <input type="file" name="files" multiple required>
+        <input type="hidden" name="corpusid" id="corpusid" value="{{ corpusid }}">
+      <br>
+      <input type="submit">
+      
+    </form>
+    
 </div>
 
 <div class="rmx-recent-data">
     <h2>Attached urls:</h2>
     {% for item in data %}
-    {% if datatype == 'crawl' %}
-    <div class="url-box">
-      <h3><a href="/data/webpage/{{ item.id }}">{% firstof item.title item.url %}</a></h3>
-	<ul>
-	    <li>
-		<a href="{{ item.url }}">{{ item.url }}</a>
-	    </li><li>
-		<span>Scraped: {{ item.created }}</span>
-	    </li>
-	</ul>
-    </div>
-    {% elif datatype == 'screenplay' %}
-    <div class="url-box">
-      <h3><a href="/data/{{ item.id }}/text/">{{item.title}}</a></h3>
-      <ul>
-	{% if item.release_date %}
-	<li>
-	  Release date: {{item.release_date}}
-	</li>
-	{% endif %}
-	{% if item.author %}
-	<li>
-	  Written by {{item.author}}
-	</li>
-	{% endif %}
-	{% if item.director %}
-	<li>
-	  Directed by {{ item.director }}
-	</li>
-	{% endif %}
-	<li>
-	  File created: {{ item.created }}
-	</li>
-	<li>
-	  <a href="/corpus/{{corpusid}}/file/{{item.id}}/" target="_blank">{{item.title}} - text file</a>
-	</li>
-      </ul>
-    </div>    
-    {% endif %}
+        <div class="url-box">
+            <h3><a href="/data/webpage/{{ item.id }}" target="_blank">{% firstof item.title item.url %}</a></h3>
+            {% if item.url %}
+                <a href="{{ item.url }}">{{ item.url }}</a><br>
+            {% endif %}
+            <span>The title: "{{ item.title }}"</span><br>
+            {% if item.author %}
+                <span>The author(s): {{ item.author }}</span><br>
+            {% endif %}
+            {% if item.file_name %}
+                <span>The file name: {{ item.file_name }}</span><br>
+            {% endif %}
+            <a href="/corpus/{{corpusid}}/file/{{item.id}}/" target="_blank">See the text file in corpus</a><br>
+            <span>Creation date: {{ item.created }}</span>
+        </div>
     {% endfor %}
+
 </div>
 
 
