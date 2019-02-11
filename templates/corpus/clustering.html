@@ -16,7 +16,12 @@
 
   </div>
 
-  <div class="server-msg"></div>
+  <div class="server-msg">
+    {% if status %}
+    <div class="message-box"><span>{{ status_message }}</span></div>
+    {% endif %}
+
+  </div>
 
   <div class="canvas-container">
     <!-- <canvas width="960" height="600"></canvas> -->
